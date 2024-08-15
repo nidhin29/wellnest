@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wellnest/Auth/signin.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:wellnest/common%20widgets/tips_widget.dart';
 import 'package:wellnest/constants/constants.dart';
 
 class HomePage extends StatelessWidget {
@@ -8,64 +9,196 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size.width;
+    String getGreeting() {
+      final hour = DateTime.now().hour;
+      if (hour < 12) {
+        return 'Good Morning';
+      } else if (hour > 12 && hour < 17) {
+        return 'Good Afternoon';
+      } else {
+        return 'Good Evening';
+      }
+    }
+
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          kheight10,
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: size * 0.04),
-            height: size * 0.95,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/imgs/OQ6UTW0.jpg'),
-                    fit: BoxFit.cover)),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(size * 0.2),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.vertical(
+            bottom: Radius.circular(25),
           ),
-          Column(
+          child: AppBar(
+            backgroundColor: maincolor,
+            titleSpacing: size * 0.09,
+            title: Padding(
+              padding: EdgeInsets.only(top: size * 0.05),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('${getGreeting()}👋',
+                      style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w400,
+                      ))),
+                  Text('Nidhin V Ninan',
+                      style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 19,
+                        fontWeight: FontWeight.w600,
+                      ))),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(size * 0.09),
+          child: Column(
             children: [
-              Text('Welcome to\n E-MOGRAM! 👋',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: size * 0.09,
-                      fontWeight: FontWeight.bold,
-                      color: maincolor)),
+              Text('Appointments Today',
+                  style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ))),
               kheight20,
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: size * 0.04),
-                child: Text(
-                  textAlign: TextAlign.center,
-                  'The ultimate platform for seamless and expert doctor appointments,revolutionizing healthcare and wellness for the modern age!',
-                  style: TextStyle(
-                      fontSize: size * 0.04,
-                      fontWeight: FontWeight.bold,
-                      color: const Color.fromARGB(255, 56, 54, 54)),
+              Container(
+                width: size * 0.8,
+                height: size * 0.4,
+                decoration: BoxDecoration(
+                  color: maincolor,
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(left: size * 0.05),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            width: size * 0.13,
+                            height: size * 0.13,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: size * 0.03),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Dr. John Doe',
+                                    style: GoogleFonts.poppins(
+                                        textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600,
+                                    ))),
+                                Text(
+                                  'General Practitioner',
+                                  style: GoogleFonts.poppins(
+                                      textStyle: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                  )),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        width: size * 0.7,
+                        height: size * 0.12,
+                        decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 209, 205, 205)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Icon(Icons.calendar_month),
+                            Text(
+                              'Monday July 13',
+                              style: GoogleFonts.poppins(
+                                  textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                              )),
+                            ),
+                            const Icon(Icons.access_time),
+                            Text(
+                              '9 AM',
+                              style: GoogleFonts.poppins(
+                                  textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                              )),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
+              kheight50,
+              Text('Health Tips',
+                  style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ))),
+              kheight20,
+              TipsWidget(
+                  color: Colors.redAccent,
+                  size: size,
+                  heading: 'Stay Hydrated',
+                  description:
+                      'Drink at least 8 glasses of water a day to keep your body hydrated and maintain energy levels'),
+              kheight20,
+              TipsWidget(
+                  size: size,
+                  heading: 'Balanced Diet',
+                  description:
+                      'Incorporate a variety of fruits, vegetables, lean proteins, and whole grains into your diet for optimal nutrition',
+                  color: Colors.blueAccent),
+              kheight20,
+              TipsWidget(
+                  size: size,
+                  heading: 'Regular Exercise',
+                  description:
+                      'Aim for at least 30 minutes of moderate exercise, like walking or cycling, most days of the week to improve cardiovascular health',
+                  color: Colors.greenAccent),
+              kheight20,
+              TipsWidget(
+                  size: size,
+                  heading: 'Proper Sleep',
+                  description:
+                      'Ensure you get 7-9 hours of quality sleep each night to help your body recover and function effectively',
+                  color: Colors.pinkAccent),
+              kheight20,
+              TipsWidget(
+                  size: size,
+                  heading: 'Stretching',
+                  description:
+                      'Start your day with a few minutes of stretching to improve flexibility, reduce muscle tension, and prevent injury',
+                  color: Colors.brown),
+              kheight20,
             ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => LoginPage(),
-              ));
-            },
-            style: ButtonStyle(
-              backgroundColor: const WidgetStatePropertyAll(maincolor),
-              minimumSize:
-                  WidgetStateProperty.all(Size(size * 0.8, size * 0.15)),
-            ),
-            child: const Text(
-              'Next',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400),
-            ),
-          ),
-          kheight5,
-        ],
+        ),
       ),
     );
   }

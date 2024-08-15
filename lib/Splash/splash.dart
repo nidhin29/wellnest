@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wellnest/Home/home.dart';
+import 'package:wellnest/Splash/intro.dart';
 import 'package:wellnest/constants/constants.dart';
 import 'package:wellnest/constants/loading.dart';
 
@@ -17,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => const HomePage(),
+        builder: (context) => const IntroPage(),
       ));
     });
   }

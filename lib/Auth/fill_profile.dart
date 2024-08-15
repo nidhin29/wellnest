@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wellnest/Home/mainscreen.dart';
 import 'package:wellnest/constants/constants.dart';
 
 class FillProfilePage extends StatelessWidget {
@@ -224,9 +225,12 @@ class FillProfilePage extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => FillProfilePage(),
-              ));
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (context) => MainScreenPage(),
+                ),
+                (route) => false,
+              );
             },
             style: ButtonStyle(
               backgroundColor: const WidgetStatePropertyAll(maincolor),

@@ -47,7 +47,7 @@ class SignUpPage extends StatelessWidget {
               controller: emailcontroller,
               decoration: InputDecoration(
                 filled: true,
-                fillColor: const Color.fromARGB(255, 155, 154, 154),
+                fillColor: const Color.fromARGB(255, 183, 179, 179),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(size * 0.04)),
                 ),
@@ -73,7 +73,7 @@ class SignUpPage extends StatelessWidget {
                     controller: passwordcontroller,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: const Color.fromARGB(255, 155, 154, 154),
+                      fillColor: const Color.fromARGB(255, 183, 179, 179),
                       suffixIcon: IconButton(
                         onPressed: () {
                           passwordfunction();

@@ -46,7 +46,7 @@ class LoginPage extends StatelessWidget {
               controller: emailcontroller,
               decoration: InputDecoration(
                 filled: true,
-                fillColor: const Color.fromARGB(255, 155, 154, 154),
+                fillColor: const Color.fromARGB(255, 183, 179, 179),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(size * 0.04)),
                 ),
@@ -72,7 +72,7 @@ class LoginPage extends StatelessWidget {
                     controller: passwordcontroller,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: const Color.fromARGB(255, 155, 154, 154),
+                      fillColor: const Color.fromARGB(255, 183, 179, 179),
                       suffixIcon: IconButton(
                         onPressed: () {
                           passwordfunction();
@@ -98,11 +98,7 @@ class LoginPage extends StatelessWidget {
               )),
           kheight5,
           ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => LoginPage(),
-              ));
-            },
+            onPressed: () {},
             style: ButtonStyle(
               backgroundColor: const WidgetStatePropertyAll(maincolor),
               minimumSize:
@@ -156,7 +152,7 @@ class LoginPage extends StatelessWidget {
                 TextButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>  SignUpPage(),
+                        builder: (context) => SignUpPage(),
                       ));
                     },
                     child: const Text(
