@@ -25,12 +25,13 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       resizeToAvoidBottomInset: false,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           kheight50,
           kheight20,
-          Text('Wellnest',
+          Text('E-MOGRAM',
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                   textStyle: const TextStyle(

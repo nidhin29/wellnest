@@ -9,6 +9,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -24,7 +25,8 @@ class HomePage extends StatelessWidget {
           ),
           Column(
             children: [
-              Text('Welcome to\nWellnest! 👋',
+              Text('Welcome to\n E-MOGRAM! 👋',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: size * 0.09,
                       fontWeight: FontWeight.bold,
@@ -46,7 +48,7 @@ class HomePage extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const LoginPage(),
+                builder: (context) => LoginPage(),
               ));
             },
             style: ButtonStyle(
