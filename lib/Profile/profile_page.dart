@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wellnest/Auth/signin.dart';
+import 'package:wellnest/Profile/about.dart';
+import 'package:wellnest/Profile/edit_profile.dart';
 import 'package:wellnest/common%20widgets/profile_menu_widget.dart';
 import 'package:wellnest/constants/constants.dart';
 
@@ -10,6 +13,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text('My Profile',
             style: GoogleFonts.poppins(
@@ -18,12 +22,6 @@ class ProfilePage extends StatelessWidget {
               fontSize: 21,
               fontWeight: FontWeight.w600,
             ))),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
       ),
       body: Column(
         children: [
@@ -37,11 +35,29 @@ class ProfilePage extends StatelessWidget {
               ))),
           kheight50,
           ProfileMenuWidget(
-              title: 'Edit Profile', icon: Icons.person, onPress: () {}),
+              title: 'Edit Profile',
+              icon: Icons.person,
+              onPress: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const EditProfileScreen(),
+                ));
+              }),
           ProfileMenuWidget(
-              title: 'About Us', icon: Icons.info, onPress: () {}),
+              title: 'About Us',
+              icon: Icons.info,
+              onPress: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const AboutPage(),
+                ));
+              }),
           ProfileMenuWidget(
-              title: 'Logout', icon: Icons.logout, onPress: () {}),
+              title: 'Logout',
+              icon: Icons.logout,
+              onPress: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => LoginPage(),
+                ));
+              }),
         ],
       ),
     );

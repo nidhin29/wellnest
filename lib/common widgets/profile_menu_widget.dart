@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wellnest/constants/constants.dart';
 
 class ProfileMenuWidget extends StatelessWidget {
   const ProfileMenuWidget({
@@ -26,7 +27,7 @@ class ProfileMenuWidget extends StatelessWidget {
         height: size1 * 0.098,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(size1 * 0.05),
-          color: const Color(0xFF5C627F),
+          color: maincolor,
         ),
         child: Icon(icon, color: Colors.white),
       ),

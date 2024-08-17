@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wellnest/Auth/signup.dart';
+import 'package:wellnest/Home/mainscreen.dart';
 import 'package:wellnest/common%20widgets/or_widget.dart';
 import 'package:wellnest/constants/constants.dart';
 
@@ -98,7 +99,11 @@ class LoginPage extends StatelessWidget {
               )),
           kheight5,
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => MainScreenPage(),
+              ));
+            },
             style: ButtonStyle(
               backgroundColor: const WidgetStatePropertyAll(maincolor),
               minimumSize:
@@ -151,9 +156,11 @@ class LoginPage extends StatelessWidget {
                 ),
                 TextButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => SignUpPage(),
-                      ));
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                            builder: (context) => SignUpPage(),
+                          ),
+                          (route) => false);
                     },
                     child: const Text(
                       'Sign Up',

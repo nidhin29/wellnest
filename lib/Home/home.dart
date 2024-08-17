@@ -28,6 +28,7 @@ class HomePage extends StatelessWidget {
             bottom: Radius.circular(25),
           ),
           child: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: maincolor,
             titleSpacing: size * 0.09,
             title: Padding(

@@ -1,6 +1,8 @@
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
 import 'package:flutter/material.dart';
-import 'package:wellnest/Appointments/appointments.dart';
-import 'package:wellnest/History/history.dart';
+import 'package:wellnest/Appointments/schedule.dart';
+import 'package:wellnest/Messages/messages.dart';
 import 'package:wellnest/Home/home.dart';
 import 'package:wellnest/Profile/profile_page.dart';
 import 'package:wellnest/constants/constants.dart';
@@ -18,8 +20,8 @@ class MainScreenPage extends StatelessWidget {
               index: newIndex,
               children: const [
                 HomePage(),
-                AppointmentsPage(),
-                HistoryPage(),
+                SchedulePage(),
+                MessagesPage(),
                 ProfilePage()
               ],
             );
@@ -46,13 +48,13 @@ class MainScreenPage extends StatelessWidget {
                       Icons.calendar_month_sharp,
                       size: 26,
                     ),
-                    label: 'Appointments'),
+                    label: 'Schedule'),
                 BottomNavigationBarItem(
                     icon: Icon(
-                      Icons.article_outlined,
+                      Icons.message_outlined,
                       size: 29.5,
                     ),
-                    label: 'History'),
+                    label: 'Messages'),
                 BottomNavigationBarItem(
                     icon: Icon(
                       Icons.person,
@@ -62,6 +64,8 @@ class MainScreenPage extends StatelessWidget {
               ],
               onTap: (value) {
                 pagenotifier.value = value;
+                // ignore: invalid_use_of_protected_member
+                pagenotifier.notifyListeners();
               },
             );
           }),
