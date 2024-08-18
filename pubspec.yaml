@@ -59,7 +59,6 @@ flutter:
     - assets/imgs/login.png
     - assets/imgs/Vector.png
     - assets/imgs/signup.png
-    - assets/imgs/couns1.png
     - assets/imgs/about.png
     - assets/imgs/doctor.webp
     - assets/success.json

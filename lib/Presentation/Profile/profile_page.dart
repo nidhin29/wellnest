@@ -11,6 +11,9 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size.width;
+    String name = 'Nidhin V Ninan';
+    String firstLetter = name[0];
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -25,7 +28,27 @@ class ProfilePage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          kheight50,
+          kheight20,
+          Container(
+            width: size * 0.4,
+            height: size * 0.4,
+            decoration: const BoxDecoration(
+              color: maincolor,
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: Text(
+                firstLetter,
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: size * 0.2,
+                  fontWeight: FontWeight.w600,
+                )),
+              ),
+            ),
+          ),
+          kheight20,
           Text('Nidhin V Ninan',
               style: GoogleFonts.poppins(
                   textStyle: const TextStyle(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wellnest/Presentation/Messages/chat.dart';
+import 'package:wellnest/Presentation/Messages/messages.dart';
 import 'package:wellnest/Presentation/common%20widgets/tips_widget.dart';
 import 'package:wellnest/Presentation/constants/constants.dart';
-
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -186,6 +186,17 @@ class AppointmentTileWidget extends StatelessWidget {
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: Text(
+                      getName(name),
+                      style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                        color: maincolor,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      )),
+                    ),
                   ),
                 ),
                 Padding(

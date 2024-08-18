@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wellnest/Presentation/Appointments/appointment.dart';
+import 'package:wellnest/Presentation/Messages/messages.dart';
 import 'package:wellnest/Presentation/common%20widgets/doctor_info.dart';
 import 'package:wellnest/Presentation/constants/constants.dart';
 
@@ -31,10 +32,16 @@ class DoctorDetailsPage extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: size * 0.2,
-            backgroundImage: const AssetImage(
-              'assets/imgs/doctor.webp',
+            backgroundColor: maincolor,
+            child: Text(
+              getName('Dr. John Doe'),
+              style: GoogleFonts.poppins(
+                  textStyle: const TextStyle(
+                color: Colors.white,
+                fontSize: 27,
+                fontWeight: FontWeight.bold,
+              )),
             ),
-            backgroundColor: Colors.white,
           ),
           Column(
             children: [
@@ -110,7 +117,7 @@ class DoctorDetailsPage extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) =>  AppointmentPage(),
+                builder: (context) => AppointmentPage(),
               ));
             },
             style: ButtonStyle(

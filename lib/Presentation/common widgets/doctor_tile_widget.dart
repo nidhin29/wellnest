@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wellnest/Presentation/Messages/messages.dart';
 import 'package:wellnest/Presentation/constants/constants.dart';
-
 
 class DoctorTileWidget extends StatelessWidget {
   const DoctorTileWidget({
     super.key,
     required this.size,
-    required this.rating, required this.name, required this.designation, required this.imageUrl,
+    required this.rating,
+    required this.name,
+    required this.designation,
+    required this.imageUrl,
   });
 
   final double size;
@@ -41,10 +44,19 @@ class DoctorTileWidget extends StatelessWidget {
             height: size * 0.4,
             width: size * 0.3,
             decoration: BoxDecoration(
+              color: maincolor,
               borderRadius: BorderRadius.circular(8),
-              image:  DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(imageUrl)),
+            ),
+            child: Center(
+              child: Text(
+                getName(name),
+                style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 27,
+                  fontWeight: FontWeight.bold,
+                )),
+              ),
             ),
           ),
           Padding(

@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:wellnest/Presentation/Messages/chat.dart';
 import 'package:wellnest/Presentation/constants/constants.dart';
 
-
 class MessagesPage extends StatelessWidget {
   const MessagesPage({super.key});
 
@@ -44,13 +43,22 @@ class MessagesPage extends StatelessWidget {
                   return GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) =>  ChatPage(),
+                        builder: (context) => const ChatPage(),
                       ));
                     },
                     child: ListTile(
-                      leading: const CircleAvatar(
+                      leading: CircleAvatar(
                         radius: 30,
-                        backgroundImage: AssetImage('assets/imgs/doctor.webp'),
+                        backgroundColor: maincolor,
+                        child: Text(
+                          getName('Dr. John Doe'),
+                          style: GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          )),
+                        ),
                       ),
                       title: Text('Dr. John Doe',
                           style: GoogleFonts.poppins(
@@ -89,4 +97,13 @@ class MessagesPage extends StatelessWidget {
       ),
     );
   }
+}
+
+String getName(String name) {
+  for (int i = 0; i < name.length; i++) {
+    if (name[i] == ' ') {
+      return name[i + 1];
+    }
+  }
+  return 'D';
 }

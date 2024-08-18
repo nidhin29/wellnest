@@ -1,11 +1,10 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wellnest/Presentation/Messages/messages.dart';
 import 'package:wellnest/Presentation/common%20widgets/reply_msg.dart';
 import 'package:wellnest/Presentation/common%20widgets/self_msg.dart';
 import 'package:wellnest/Presentation/constants/constants.dart';
-
-
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -45,7 +44,17 @@ class _ChatPageState extends State<ChatPage> {
           children: [
             CircleAvatar(
               radius: size * 0.045,
-              backgroundImage: const AssetImage('assets/imgs/doctor.webp'),
+              child: Center(
+                child: Text(
+                  getName('Dr. John Doe'),
+                  style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                    color: maincolor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  )),
+                ),
+              ),
             ),
             kwidth10,
             Text('Dr. John Doe',
