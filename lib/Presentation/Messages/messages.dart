@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wellnest/Messages/chat.dart';
-import 'package:wellnest/constants/constants.dart';
+import 'package:wellnest/Presentation/Messages/chat.dart';
+import 'package:wellnest/Presentation/constants/constants.dart';
+
 
 class MessagesPage extends StatelessWidget {
   const MessagesPage({super.key});

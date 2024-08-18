@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wellnest/Appointments/appointment.dart';
-import 'package:wellnest/common%20widgets/doctor_info.dart';
-import 'package:wellnest/constants/constants.dart';
+import 'package:wellnest/Presentation/Appointments/appointment.dart';
+import 'package:wellnest/Presentation/common%20widgets/doctor_info.dart';
+import 'package:wellnest/Presentation/constants/constants.dart';
 
 class DoctorDetailsPage extends StatelessWidget {
   const DoctorDetailsPage({super.key});

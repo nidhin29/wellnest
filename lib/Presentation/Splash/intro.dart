@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wellnest/Auth/signin.dart';
-import 'package:wellnest/constants/constants.dart';
+import 'package:wellnest/Presentation/Auth/signin.dart';
+import 'package:wellnest/Presentation/constants/constants.dart';
+
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});

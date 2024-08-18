@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:wellnest/Home/mainscreen.dart';
-import 'package:wellnest/constants/constants.dart';
+import 'package:wellnest/Presentation/Home/mainscreen.dart';
+import 'package:wellnest/Presentation/constants/constants.dart';
+
 
 class SuccessPage extends StatelessWidget {
   const SuccessPage({super.key});

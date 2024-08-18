@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wellnest/Auth/signup.dart';
-import 'package:wellnest/Home/mainscreen.dart';
-import 'package:wellnest/common%20widgets/or_widget.dart';
-import 'package:wellnest/constants/constants.dart';
+import 'package:wellnest/Presentation/Auth/fill_profile.dart';
+import 'package:wellnest/Presentation/Auth/signin.dart';
+import 'package:wellnest/Presentation/common%20widgets/or_widget.dart';
+import 'package:wellnest/Presentation/constants/constants.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
 
+class SignUpPage extends StatelessWidget {
+  SignUpPage({super.key});
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
   final ValueNotifier<bool> obtext = ValueNotifier<bool>(false);
@@ -23,16 +23,17 @@ class LoginPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          kheight10,
           kheight5,
           Container(
             width: double.infinity,
             height: size * 0.8,
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('assets/imgs/login.png'),
+                    image: AssetImage('assets/imgs/signup.png'),
                     fit: BoxFit.cover)),
           ),
-          Text('Login to Your Account',
+          Text('Create New Account',
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                   textStyle: TextStyle(
@@ -97,11 +98,11 @@ class LoginPage extends StatelessWidget {
                   );
                 },
               )),
-          kheight5,
+          kheight10,
           ElevatedButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => MainScreenPage(),
+                builder: (context) => FillProfilePage(),
               ));
             },
             style: ButtonStyle(
@@ -110,7 +111,7 @@ class LoginPage extends StatelessWidget {
                   WidgetStateProperty.all(Size(size * 0.8, size * 0.15)),
             ),
             child: const Text(
-              'Sign in',
+              'Sign up',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -148,7 +149,7 @@ class LoginPage extends StatelessWidget {
             child: Row(
               children: [
                 const Text(
-                  'Don\'t have an account?',
+                  'Already have an account?',
                   style: TextStyle(
                       color: Colors.grey,
                       fontSize: 15,
@@ -156,14 +157,12 @@ class LoginPage extends StatelessWidget {
                 ),
                 TextButton(
                     onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                            builder: (context) => SignUpPage(),
-                          ),
-                          (route) => false);
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => LoginPage(),
+                      ));
                     },
                     child: const Text(
-                      'Sign Up',
+                      'Sign In',
                       style: TextStyle(color: maincolor),
                     )),
               ],

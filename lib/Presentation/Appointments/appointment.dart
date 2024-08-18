@@ -3,8 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:wellnest/Appointments/success.dart';
-import 'package:wellnest/constants/constants.dart';
+import 'package:wellnest/Presentation/Appointments/success.dart';
+import 'package:wellnest/Presentation/constants/constants.dart';
+
 
 // ignore: must_be_immutable
 class AppointmentPage extends StatelessWidget {

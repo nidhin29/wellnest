@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wellnest/constants/constants.dart';
+import 'package:wellnest/Presentation/constants/constants.dart';
+
 
 class DoctorInfo extends StatelessWidget {
   const DoctorInfo({super.key, required this.patients, required this.exp});

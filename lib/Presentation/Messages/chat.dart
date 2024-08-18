@@ -1,9 +1,11 @@
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wellnest/common%20widgets/reply_msg.dart';
-import 'package:wellnest/common%20widgets/self_msg.dart';
-import 'package:wellnest/constants/constants.dart';
+import 'package:wellnest/Presentation/common%20widgets/reply_msg.dart';
+import 'package:wellnest/Presentation/common%20widgets/self_msg.dart';
+import 'package:wellnest/Presentation/constants/constants.dart';
+
+
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});

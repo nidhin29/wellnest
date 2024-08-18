@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wellnest/Splash/intro.dart';
-import 'package:wellnest/constants/constants.dart';
-import 'package:wellnest/constants/loading.dart';
+import 'package:wellnest/Presentation/Splash/intro.dart';
+import 'package:wellnest/Presentation/constants/constants.dart';
+import 'package:wellnest/Presentation/constants/loading.dart';
+
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

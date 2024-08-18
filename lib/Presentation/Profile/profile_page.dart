@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wellnest/Auth/signin.dart';
-import 'package:wellnest/Profile/about.dart';
-import 'package:wellnest/Profile/edit_profile.dart';
-import 'package:wellnest/common%20widgets/profile_menu_widget.dart';
-import 'package:wellnest/constants/constants.dart';
+import 'package:wellnest/Presentation/Auth/signin.dart';
+import 'package:wellnest/Presentation/Profile/about.dart';
+import 'package:wellnest/Presentation/Profile/edit_profile.dart';
+import 'package:wellnest/Presentation/common%20widgets/profile_menu_widget.dart';
+import 'package:wellnest/Presentation/constants/constants.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});

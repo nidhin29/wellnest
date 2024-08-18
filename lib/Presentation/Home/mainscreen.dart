@@ -1,11 +1,12 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member
 
 import 'package:flutter/material.dart';
-import 'package:wellnest/Appointments/schedule.dart';
-import 'package:wellnest/Messages/messages.dart';
-import 'package:wellnest/Home/home.dart';
-import 'package:wellnest/Profile/profile_page.dart';
-import 'package:wellnest/constants/constants.dart';
+import 'package:wellnest/Presentation/Appointments/schedule.dart';
+import 'package:wellnest/Presentation/Home/home.dart';
+import 'package:wellnest/Presentation/Messages/messages.dart';
+import 'package:wellnest/Presentation/Profile/profile_page.dart';
+import 'package:wellnest/Presentation/constants/constants.dart';
+
 
 class MainScreenPage extends StatelessWidget {
   MainScreenPage({super.key});

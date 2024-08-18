@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wellnest/Splash/splash.dart';
+import 'package:wellnest/Presentation/Splash/splash.dart';
+
 
 void main(List<String> args) {
   runApp(const MyApp());
