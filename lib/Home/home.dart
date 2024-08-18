@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wellnest/Messages/chat.dart';
 import 'package:wellnest/common%20widgets/tips_widget.dart';
 import 'package:wellnest/constants/constants.dart';
 
@@ -61,7 +62,7 @@ class HomePage extends StatelessWidget {
           padding: EdgeInsets.all(size * 0.09),
           child: Column(
             children: [
-              Text('Appointments Today',
+              Text('Upcoming Appointments',
                   style: GoogleFonts.poppins(
                       textStyle: const TextStyle(
                     color: Colors.black,
@@ -69,89 +70,29 @@ class HomePage extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ))),
               kheight20,
-              Container(
-                width: size * 0.8,
+              SizedBox(
                 height: size * 0.4,
-                decoration: BoxDecoration(
-                  color: maincolor,
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.only(left: size * 0.05),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: size * 0.13,
-                            height: size * 0.13,
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: size * 0.03),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Dr. John Doe',
-                                    style: GoogleFonts.poppins(
-                                        textStyle: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w600,
-                                    ))),
-                                Text(
-                                  'General Practitioner',
-                                  style: GoogleFonts.poppins(
-                                      textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                  )),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        width: size * 0.7,
-                        height: size * 0.12,
-                        decoration: const BoxDecoration(
-                            color: Color.fromARGB(255, 209, 205, 205)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            const Icon(Icons.calendar_month),
-                            Text(
-                              'Monday July 13',
-                              style: GoogleFonts.poppins(
-                                  textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                              )),
-                            ),
-                            const Icon(Icons.access_time),
-                            Text(
-                              '9 AM',
-                              style: GoogleFonts.poppins(
-                                  textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                              )),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                child: ListView.separated(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const ChatPage()));
+                        },
+                        child: AppointmentTileWidget(
+                            size: size - 12,
+                            name: 'Dr. John Doe',
+                            speciality: 'Cardiologist',
+                            date: 'Monday July 13',
+                            time: '10:00 AM'),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return kwidth10;
+                    },
+                    itemCount: 5),
               ),
               kheight50,
               Text('Health Tips',
@@ -199,6 +140,111 @@ class HomePage extends StatelessWidget {
               kheight20,
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class AppointmentTileWidget extends StatelessWidget {
+  const AppointmentTileWidget({
+    super.key,
+    required this.size,
+    required this.name,
+    required this.speciality,
+    required this.date,
+    required this.time,
+  });
+
+  final double size;
+  final String name;
+  final String speciality;
+  final String date;
+  final String time;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size * 0.8,
+      height: size * 0.4,
+      decoration: BoxDecoration(
+        color: maincolor,
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(left: size * 0.05),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: size * 0.13,
+                  height: size * 0.13,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: size * 0.03),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(name,
+                          style: GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                          ))),
+                      Text(
+                        speciality,
+                        style: GoogleFonts.poppins(
+                            textStyle: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        )),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              width: size * 0.7,
+              height: size * 0.12,
+              decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 209, 205, 205)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const Icon(Icons.calendar_month),
+                  Text(
+                    date,
+                    style: GoogleFonts.poppins(
+                        textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                    )),
+                  ),
+                  const Icon(Icons.access_time),
+                  Text(
+                    time,
+                    style: GoogleFonts.poppins(
+                        textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                    )),
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
