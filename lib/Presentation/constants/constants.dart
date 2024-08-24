@@ -11,3 +11,5 @@ const kwidth5 = SizedBox(width: 5);
 const kwidth30 = SizedBox(width: 30);
 
 const maincolor = Color.fromARGB(255, 19, 89, 147);
+
+const baseUrl = 'https://logiccraft.pythonanywhere.com/';
