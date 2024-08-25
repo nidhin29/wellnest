@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wellnest/Application/profile/profile_cubit.dart';
+import 'package:wellnest/Domain/Failure/failure.dart';
+import 'package:wellnest/Domain/Profile/profile_model.dart';
+import 'package:wellnest/Presentation/common%20widgets/snackbar.dart';
+import 'package:wellnest/Presentation/constants/loading.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -11,9 +17,6 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController _nameController =
       TextEditingController(text: "XXXX");
-
-  final TextEditingController _emailController =
-      TextEditingController(text: "XXXX@gmail.ocm");
 
   final TextEditingController _ageController =
       TextEditingController(text: "00");
@@ -29,6 +32,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
+    final profileState = BlocProvider.of<ProfileCubit>(context).state;
+    profileState.isFailureOrSuccessForGet.fold(() {
+      BlocProvider.of<ProfileCubit>(context).getProfile();
+    }, (a) {
+      a.fold((l) {
+        BlocProvider.of<ProfileCubit>(context).getProfile();
+      }, (r) {});
+    });
   }
 
   @override
@@ -54,7 +65,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           Padding(
             padding: EdgeInsets.only(right: size * 0.02, bottom: size * 0.01),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                BlocProvider.of<ProfileCubit>(context).updateProfile(
+                    profileModel: ProfileModel(_genderNotifier.value,
+                        age: int.parse(_ageController.text),
+                        facebookApi: _facebookController.text,
+                        weightAddress: _weightController.text,
+                        name: _nameController.text));
+              },
               child: const Text(
                 'Save',
                 style: TextStyle(
@@ -67,47 +85,122 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 40,
-              ),
-              _TextFieldWithTitle(
-                title: "Name",
-                controller: _nameController,
-              ),
-              _TextFieldWithTitle(
-                title: "Email",
-                controller: _emailController,
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: size * 0.58),
-                child: _DropdownWithTitle(
-                  title: "Gender",
-                  items: const [
-                    "Male",
-                    "Female",
-                  ],
-                  selectedValue: _genderNotifier,
+          child: BlocConsumer<ProfileCubit, ProfileState>(
+            listener: (context, state) {
+              state.isFailureOrSuccessForUpdate.fold(
+                () {},
+                (either) => either.fold(
+                  (failure) {
+                    if (!state.isLoading) {
+                      if (failure == const MainFailure.serverFailure()) {
+                        displaySnackBar(
+                            context: context, text: "Server is down");
+                      } else if (failure == const MainFailure.clientFailure()) {
+                        displaySnackBar(
+                            context: context,
+                            text: "Something wrong with your network");
+                      } else {
+                        displaySnackBar(
+                            context: context,
+                            text: "Something Unexpected Happened");
+                      }
+                    }
+                  },
+                  (r) {
+                    Navigator.of(context).pop();
+                  },
                 ),
-              ),
-              _TextFieldWithTitle(
-                title: "Age",
-                controller: _ageController,
-              ),
-              _TextFieldWithTitle(
-                title: "Weight",
-                controller: _weightController,
-              ),
-              _TextFieldWithTitle(
-                title: "Facebook API Key",
-                controller: _facebookController,
-              ),
-              const SizedBox(
-                height: 60,
-              ),
-            ],
+              );
+              state.isFailureOrSuccessForGet.fold(
+                () {},
+                (either) => either.fold(
+                  (failure) {
+                    if (!state.isLoading) {
+                      if (failure == const MainFailure.serverFailure()) {
+                        displaySnackBar(
+                            context: context, text: "Server is down");
+                      } else if (failure == const MainFailure.clientFailure()) {
+                        displaySnackBar(
+                            context: context,
+                            text: "Something wrong with your network");
+                      } else {
+                        displaySnackBar(
+                            context: context,
+                            text: "Something Unexpected Happened");
+                      }
+                    }
+                  },
+                  (r) {},
+                ),
+              );
+            },
+            builder: (context, state) {
+              if (state.isLoading) {
+                return const Center(
+                  child: spinkit,
+                );
+              }
+              state.isFailureOrSuccessForGet.fold(() {
+                return const Center(child: Text('Error...'));
+              }, (either) {
+                either.fold((failure) {
+                  if (failure == const MainFailure.clientFailure()) {
+                    return const Center(child: Text('Network Error...'));
+                  } else if (failure == const MainFailure.serverFailure()) {
+                    return const Center(child: Text('Server Error...'));
+                  } else {
+                    const Center(child: Text('Impossible Error...'));
+                  }
+                }, (r) {
+                  _nameController.text = r.name == null ? "XXXX" : r.name!;
+                  _ageController.text =
+                      r.age == null ? "00" : r.age!.toString();
+                  _weightController.text =
+                      r.address == null ? "00" : r.address!;
+                  _facebookController.text =
+                      r.apiKey == null ? "XXXX" : r.apiKey!;
+                  _genderNotifier.value = r.gender!;
+                });
+              });
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  _TextFieldWithTitle(
+                    title: "Name",
+                    controller: _nameController,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: size * 0.58),
+                    child: _DropdownWithTitle(
+                      title: "Gender",
+                      items: const [
+                        "Male",
+                        "Female",
+                      ],
+                      selectedValue: _genderNotifier,
+                    ),
+                  ),
+                  _TextFieldWithTitle(
+                    title: "Age",
+                    controller: _ageController,
+                  ),
+                  _TextFieldWithTitle(
+                    title: "Weight",
+                    controller: _weightController,
+                  ),
+                  _TextFieldWithTitle(
+                    title: "Facebook API Key",
+                    controller: _facebookController,
+                  ),
+                  const SizedBox(
+                    height: 60,
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),

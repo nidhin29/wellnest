@@ -1,31 +1,27 @@
 import 'dart:developer';
 import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:wellnest/Domain/Failure/failure.dart';
-import 'package:wellnest/Domain/SignIn/sign_in_model.dart';
-import 'package:wellnest/Domain/SignIn/sign_in_service.dart';
+import 'package:wellnest/Domain/Home/home_service.dart';
 import 'package:wellnest/Presentation/constants/constants.dart';
 
-@LazySingleton(as: SignInService)
-class SignInRepo implements SignInService {
+@LazySingleton(as: HomeService)
+class HomeRepo implements HomeService {
   @override
-  Future<Either<MainFailure, SignInModel>> signInWithEmailAndPassword(
-      String email, String password) async {
-    try {
-      
-      final Map<String, dynamic> headers = {
+  Future<Either<MainFailure, Unit>> getDetails() async{
+     try{
+       final Map<String, dynamic> headers = {
         'Content-Type': 'application/json',
       };
-      final Response response = await Dio(BaseOptions(headers: headers)).post(
+      final Response response = await Dio(BaseOptions(headers: headers)).get(
         "${baseUrl}api/UserLogin",
-        data: {"email": email, "password": password},
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         log(response.data.toString());
-        final signInModel = SignInModel.fromJson(response.data); 
-        return  Right(signInModel);
+        return const Right(unit);
       } else {
         return const Left(MainFailure.serverFailure());
       }
@@ -44,4 +40,5 @@ class SignInRepo implements SignInService {
       }
     }
   }
+
 }

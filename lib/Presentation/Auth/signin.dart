@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wellnest/Application/signin_cubit.dart';
+import 'package:wellnest/Application/signin/signin_cubit.dart';
 import 'package:wellnest/Domain/Failure/failure.dart';
 import 'package:wellnest/Presentation/Auth/signup.dart';
 import 'package:wellnest/Presentation/Home/mainscreen.dart';
-import 'package:wellnest/Presentation/common%20widgets/or_widget.dart';
 import 'package:wellnest/Presentation/common%20widgets/snackbar.dart';
 import 'package:wellnest/Presentation/constants/constants.dart';
 import 'package:wellnest/Presentation/constants/loading.dart';
@@ -199,31 +198,6 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               kheight5,
-              const OrWidget(),
-              kheight5,
-              Container(
-                width: 50,
-                height: 40,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 1,
-                      blurRadius: 3,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: Container(
-                  width: 10,
-                  height: 10,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/imgs/Vector.png'))),
-                ),
-              ),
               Padding(
                 padding: EdgeInsets.only(left: size * 0.18),
                 child: Row(
@@ -237,11 +211,11 @@ class LoginPage extends StatelessWidget {
                     ),
                     TextButton(
                         onPressed: () {
-                          Navigator.of(context).pushAndRemoveUntil(
+                          Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => SignUpPage(),
                               ),
-                              (route) => false);
+                           );
                         },
                         child: const Text(
                           'Sign Up',

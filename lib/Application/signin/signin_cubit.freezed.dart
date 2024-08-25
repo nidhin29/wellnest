@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SigninState {
   bool get isLoading => throw _privateConstructorUsedError;
-  Option<Either<MainFailure, Unit>> get isFailureOrSuccess =>
+  Option<Either<MainFailure, SignInModel>> get isFailureOrSuccess =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,7 +32,8 @@ abstract class $SigninStateCopyWith<$Res> {
       _$SigninStateCopyWithImpl<$Res, SigninState>;
   @useResult
   $Res call(
-      {bool isLoading, Option<Either<MainFailure, Unit>> isFailureOrSuccess});
+      {bool isLoading,
+      Option<Either<MainFailure, SignInModel>> isFailureOrSuccess});
 }
 
 /// @nodoc
@@ -59,7 +60,7 @@ class _$SigninStateCopyWithImpl<$Res, $Val extends SigninState>
       isFailureOrSuccess: null == isFailureOrSuccess
           ? _value.isFailureOrSuccess
           : isFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, Unit>>,
+              as Option<Either<MainFailure, SignInModel>>,
     ) as $Val);
   }
 }
@@ -73,7 +74,8 @@ abstract class _$$SigninStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isLoading, Option<Either<MainFailure, Unit>> isFailureOrSuccess});
+      {bool isLoading,
+      Option<Either<MainFailure, SignInModel>> isFailureOrSuccess});
 }
 
 /// @nodoc
@@ -98,7 +100,7 @@ class __$$SigninStateImplCopyWithImpl<$Res>
       isFailureOrSuccess: null == isFailureOrSuccess
           ? _value.isFailureOrSuccess
           : isFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, Unit>>,
+              as Option<Either<MainFailure, SignInModel>>,
     ));
   }
 }
@@ -112,7 +114,7 @@ class _$SigninStateImpl implements _SigninState {
   @override
   final bool isLoading;
   @override
-  final Option<Either<MainFailure, Unit>> isFailureOrSuccess;
+  final Option<Either<MainFailure, SignInModel>> isFailureOrSuccess;
 
   @override
   String toString() {
@@ -143,13 +145,13 @@ class _$SigninStateImpl implements _SigninState {
 abstract class _SigninState implements SigninState {
   const factory _SigninState(
       {required final bool isLoading,
-      required final Option<Either<MainFailure, Unit>>
+      required final Option<Either<MainFailure, SignInModel>>
           isFailureOrSuccess}) = _$SigninStateImpl;
 
   @override
   bool get isLoading;
   @override
-  Option<Either<MainFailure, Unit>> get isFailureOrSuccess;
+  Option<Either<MainFailure, SignInModel>> get isFailureOrSuccess;
   @override
   @JsonKey(ignore: true)
   _$$SigninStateImplCopyWith<_$SigninStateImpl> get copyWith =>

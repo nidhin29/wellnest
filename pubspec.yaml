@@ -46,6 +46,7 @@ dependencies:
   injectable_generator: ^2.6.2
   lottie: ^3.1.2
   shared_preferences: ^2.3.2
+  shimmer: ^3.0.0
   table_calendar: ^3.1.2
 
 dev_dependencies:
@@ -72,6 +73,7 @@ flutter:
     - assets/imgs/about.png
     - assets/imgs/doctor.webp
     - assets/success.json
+    - assets/imgs/noData.png
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
