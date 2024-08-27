@@ -4,11 +4,11 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wellnest/Domain/Failure/failure.dart';
 import 'package:wellnest/Domain/Profile/model.dart';
 import 'package:wellnest/Domain/Profile/profile_model.dart';
 import 'package:wellnest/Domain/Profile/profile_service.dart';
-import 'package:wellnest/Domain/TokenManager/token_manager.dart';
 import 'package:wellnest/Presentation/constants/constants.dart';
 
 @LazySingleton(as: ProfileService)
@@ -16,8 +16,8 @@ class ProfileRepo implements ProfileService {
   @override
   Future<Either<MainFailure, Model>> getProfile() async {
     try {
-      final email = TokenManager.instance.email;
-
+      final sha = await SharedPreferences.getInstance();
+      final email = sha.getString('email');
       final Map<String, dynamic> headers = {
         'Content-Type': 'application/json',
       };
@@ -52,7 +52,8 @@ class ProfileRepo implements ProfileService {
   Future<Either<MainFailure, Unit>> updateProfile(
       {required ProfileModel profileModel}) async {
     try {
-      final email = TokenManager.instance.email;
+       final sha = await SharedPreferences.getInstance();
+      final email = sha.getString('email');
       final Map<String, dynamic> headers = {
         'Content-Type': 'application/json',
       };

@@ -49,6 +49,8 @@ class SignUpPage extends StatelessWidget {
                       }
                     },
                     (r) {
+                      BlocProvider.of<SignupCubit>(context)
+                          .saveEmail(email: emailcontroller.text);
                       Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
                           builder: (context) => FillProfilePage(),
@@ -65,7 +67,6 @@ class SignUpPage extends StatelessWidget {
             );
           }
           return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               kheight10,
               kheight5,
@@ -85,6 +86,8 @@ class SignUpPage extends StatelessWidget {
                     fontSize: size * 0.07,
                     fontWeight: FontWeight.w600,
                   ))),
+              kheight5,
+              kheight10,
               kheight5,
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -118,6 +121,7 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
               kheight5,
+              kheight10,
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: ValueListenableBuilder(
@@ -168,7 +172,7 @@ class SignUpPage extends StatelessWidget {
                       );
                     },
                   )),
-              kheight10,
+              const Spacer(),
               ElevatedButton(
                 onPressed: () {
                   if (emailcontroller.text.isEmpty ||
@@ -219,6 +223,8 @@ class SignUpPage extends StatelessWidget {
                   ],
                 ),
               ),
+              kheight10,
+              kheight10,
             ],
           );
         },

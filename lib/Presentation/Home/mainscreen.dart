@@ -7,25 +7,17 @@ import 'package:wellnest/Presentation/Messages/messages.dart';
 import 'package:wellnest/Presentation/Profile/profile_page.dart';
 import 'package:wellnest/Presentation/constants/constants.dart';
 
-
+  ValueNotifier<int> pagenotifier = ValueNotifier(0);
 class MainScreenPage extends StatelessWidget {
-  MainScreenPage({super.key});
-  final ValueNotifier<int> pagenotifier = ValueNotifier(0);
+  const MainScreenPage({super.key});
+ final _pages = const [HomePage(), SchedulePage(), MessagesPage(), ProfilePage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ValueListenableBuilder(
           valueListenable: pagenotifier,
           builder: (context, newIndex, _) {
-            return IndexedStack(
-              index: newIndex,
-              children: const [
-                HomePage(),
-                SchedulePage(),
-                MessagesPage(),
-                ProfilePage()
-              ],
-            );
+            return _pages[newIndex];
           }),
       bottomNavigationBar: ValueListenableBuilder(
           valueListenable: pagenotifier,
@@ -65,8 +57,6 @@ class MainScreenPage extends StatelessWidget {
               ],
               onTap: (value) {
                 pagenotifier.value = value;
-                // ignore: invalid_use_of_protected_member
-                pagenotifier.notifyListeners();
               },
             );
           }),

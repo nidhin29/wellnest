@@ -7,6 +7,7 @@ import 'package:wellnest/Domain/Profile/profile_model.dart';
 import 'package:wellnest/Presentation/Home/mainscreen.dart';
 import 'package:wellnest/Presentation/common%20widgets/snackbar.dart';
 import 'package:wellnest/Presentation/constants/constants.dart';
+import 'package:wellnest/Presentation/constants/loading.dart';
 
 class FillProfilePage extends StatelessWidget {
   FillProfilePage({super.key});
@@ -29,39 +30,40 @@ class FillProfilePage extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ))),
       ),
-      body: BlocListener<ProfileCubit, ProfileState>(
-        listener: (context, state) {
-         state.isFailureOrSuccessForUpdate.fold(
-                () {},
-                (either) => either.fold(
-                  (failure) {
-                    if (!state.isLoading) {
-                      if (failure == const MainFailure.serverFailure()) {
-                        displaySnackBar(
-                            context: context, text: "Server is down");
-                      } else if (failure == const MainFailure.clientFailure()) {
-                        displaySnackBar(
-                            context: context,
-                            text: "Something wrong with your network");
-                      } else {
-                        displaySnackBar(
-                            context: context,
-                            text: "Something Unexpected Happened");
-                      }
-                    }
-                  },
-                  (r) {
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => MainScreenPage(),
-                      ),
-                      (route) => false,
-                    );
-                  },
+      body:
+          BlocConsumer<ProfileCubit, ProfileState>(listener: (context, state) {
+        state.isFailureOrSuccessForUpdate.fold(
+          () {},
+          (either) => either.fold(
+            (failure) {
+              if (!state.isLoading) {
+                if (failure == const MainFailure.serverFailure()) {
+                  displaySnackBar(context: context, text: "Server is down");
+                } else if (failure == const MainFailure.clientFailure()) {
+                  displaySnackBar(
+                      context: context,
+                      text: "Something wrong with your network");
+                } else {
+                  displaySnackBar(
+                      context: context, text: "Something Unexpected Happened");
+                }
+              }
+            },
+            (r) {
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (context) => const MainScreenPage(),
                 ),
+                (route) => false,
               );
-        },
-        child: Column(
+            },
+          ),
+        );
+      }, builder: (context, state) {
+        if( state.isLoading){
+          return const Center(child: spinkit);
+        }
+        return Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Column(
@@ -69,13 +71,6 @@ class FillProfilePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Name cannot be empty';
-                      }
-                      return null;
-                    },
                     controller: nameController,
                     decoration: InputDecoration(
                       filled: true,
@@ -107,13 +102,6 @@ class FillProfilePage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(right: size * 0.75, left: 15),
                   child: TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Age cannot be empty';
-                      }
-                      return null;
-                    },
                     keyboardType: TextInputType.number,
                     controller: ageController,
                     decoration: InputDecoration(
@@ -146,13 +134,6 @@ class FillProfilePage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(right: size * 0.65, left: 15),
                   child: TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Weight cannot be empty';
-                      }
-                      return null;
-                    },
                     keyboardType: TextInputType.number,
                     controller: weightController,
                     decoration: InputDecoration(
@@ -193,13 +174,6 @@ class FillProfilePage extends StatelessWidget {
                     return Padding(
                       padding: EdgeInsets.only(left: 15, right: size * 0.65),
                       child: DropdownButtonFormField(
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Gender cannot be empty';
-                          }
-                          return null;
-                        },
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: const Color.fromARGB(255, 213, 212, 216),
@@ -254,13 +228,6 @@ class FillProfilePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: TextFormField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Facebook API Key cannot be empty';
-                      }
-                      return null;
-                    },
                     controller: facebookController,
                     decoration: InputDecoration(
                       filled: true,
@@ -299,13 +266,14 @@ class FillProfilePage extends StatelessWidget {
                     gender.value == null) {
                   displaySnackBar(
                       context: context, text: 'Please fill all the fields');
+                } else {
+                  BlocProvider.of<ProfileCubit>(context).updateProfile(
+                      profileModel: ProfileModel(gender.value!,
+                          age: int.parse(ageController.text),
+                          facebookApi: facebookController.text,
+                          weightAddress: weightController.text,
+                          name: nameController.text));
                 }
-                BlocProvider.of<ProfileCubit>(context).updateProfile(
-                    profileModel: ProfileModel(gender.value!,
-                        age: int.parse(ageController.text),
-                        facebookApi: facebookController.text,
-                        weightAddress: weightController.text,
-                        name: nameController.text));
               },
               style: ButtonStyle(
                 backgroundColor: const WidgetStatePropertyAll(maincolor),
@@ -321,8 +289,8 @@ class FillProfilePage extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
+        );
+      }),
     );
   }
 }

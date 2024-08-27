@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:wellnest/Application/edit_profile/editprofile_cubit.dart';
 import 'package:wellnest/Application/home/home_cubit.dart';
 import 'package:wellnest/Application/loggedin/loggedin_cubit.dart';
 import 'package:wellnest/Application/profile/profile_cubit.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<SignupCubit>(create: (context) => getIt<SignupCubit>()),
         BlocProvider<LoggedinCubit>(
             create: (context) => getIt<LoggedinCubit>()),
-        BlocProvider<ProfileCubit>(create: (context) => getIt<ProfileCubit>())
+        BlocProvider<ProfileCubit>(create: (context) => getIt<ProfileCubit>()),
+         BlocProvider<EditprofileCubit>(create: (context) => getIt<EditprofileCubit>())
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

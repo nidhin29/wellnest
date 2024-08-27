@@ -17,6 +17,7 @@ class _ChatPageState extends State<ChatPage> {
   final ValueNotifier<bool> isEmojiPickerVisible = ValueNotifier(false);
   final ValueNotifier<FocusNode> focusNodeNotifier = ValueNotifier(FocusNode());
   final TextEditingController textEditingController = TextEditingController();
+
   @override
   void initState() {
     focusNodeNotifier.value.addListener(() {
@@ -31,6 +32,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: const Color.fromARGB(255, 166, 233, 237),
       appBar: AppBar(
         backgroundColor: maincolor,
@@ -67,69 +69,68 @@ class _ChatPageState extends State<ChatPage> {
           ],
         ),
       ),
-      body: Stack(
+      body: Column(
         children: [
-          ListView(
-            children: const [
-              SizedBox(height: 10),
-              ReplyCard(
-                message: 'Hello, How can I help you?',
-                time: '10:00 AM',
-              ),
-              SizedBox(height: 10),
-              OwnMessageCard(
-                message: 'I am having a headache',
-                time: '10:05 AM',
-              ),
-              SizedBox(height: 10),
-              ReplyCard(
-                message: 'I will prescribe you some medicines',
-                time: '10:10 AM',
-              ),
-              SizedBox(height: 10),
-              OwnMessageCard(
-                message: 'Thank you',
-                time: '10:15 AM',
-              ),
-              SizedBox(height: 10),
-              ReplyCard(
-                message: 'You are welcome',
-                time: '10:20 AM',
-              ),
-              SizedBox(height: 10),
-              OwnMessageCard(
-                message: 'Goodbye',
-                time: '10:25 AM',
-              ),
-              SizedBox(height: 10),
-            ],
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ChatInputWidget(
-                  onEmojiPressed: () {
-                    if (!isEmojiPickerVisible.value) {
-                      focusNodeNotifier.value.unfocus();
-                      focusNodeNotifier.value.canRequestFocus = true;
-                    }
-                    isEmojiPickerVisible.value = !isEmojiPickerVisible.value;
-                  },
-                  focusNodeNotifier: focusNodeNotifier,
-                  textEditingController: textEditingController,
+          Expanded(
+            child: ListView(
+              shrinkWrap: true,
+              children: const [
+                SizedBox(height: 10),
+                ReplyCard(
+                  message: 'Hello, How can I help you?',
+                  time: '10:00 AM',
                 ),
-                ValueListenableBuilder(
-                  valueListenable: isEmojiPickerVisible,
-                  builder: (context, isVisible, child) {
-                    return isVisible
-                        ? emojiSelect(textEditingController)
-                        : const SizedBox.shrink();
-                  },
+                SizedBox(height: 10),
+                OwnMessageCard(
+                  message: 'I am having a headache',
+                  time: '10:05 AM',
+                ),
+                SizedBox(height: 10),
+                ReplyCard(
+                  message: 'I will prescribe you some medicines',
+                  time: '10:10 AM',
+                ),
+                SizedBox(height: 10),
+                OwnMessageCard(
+                  message: 'Thank you',
+                  time: '10:15 AM',
+                ),
+                SizedBox(height: 10),
+                ReplyCard(
+                  message: 'You are welcome',
+                  time: '10:20 AM',
+                ),
+                SizedBox(height: 10),
+                OwnMessageCard(
+                  message: 'Goodbye',
+                  time: '10:25 AM',
                 ),
               ],
             ),
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ChatInputWidget(
+                onEmojiPressed: () {
+                  if (!isEmojiPickerVisible.value) {
+                    focusNodeNotifier.value.unfocus();
+                    focusNodeNotifier.value.canRequestFocus = true;
+                  }
+                  isEmojiPickerVisible.value = !isEmojiPickerVisible.value;
+                },
+                focusNodeNotifier: focusNodeNotifier,
+                textEditingController: textEditingController,
+              ),
+              ValueListenableBuilder(
+                valueListenable: isEmojiPickerVisible,
+                builder: (context, isVisible, child) {
+                  return isVisible
+                      ? emojiSelect(textEditingController)
+                      : const SizedBox.shrink();
+                },
+              ),
+            ],
           ),
         ],
       ),

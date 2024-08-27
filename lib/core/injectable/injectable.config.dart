@@ -10,6 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:wellnest/Application/edit_profile/editprofile_cubit.dart'
+    as _i317;
 import 'package:wellnest/Application/home/home_cubit.dart' as _i914;
 import 'package:wellnest/Application/loggedin/loggedin_cubit.dart' as _i802;
 import 'package:wellnest/Application/profile/profile_cubit.dart' as _i890;
@@ -56,8 +58,12 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i606.ProfileService>(),
           gh<_i20.TokenService>(),
         ));
-    gh.factory<_i340.SignupCubit>(
-        () => _i340.SignupCubit(gh<_i244.SignUpService>()));
+    gh.factory<_i340.SignupCubit>(() => _i340.SignupCubit(
+          gh<_i244.SignUpService>(),
+          gh<_i20.TokenService>(),
+        ));
+    gh.factory<_i317.EditprofileCubit>(
+        () => _i317.EditprofileCubit(gh<_i606.ProfileService>()));
     return this;
   }
 }

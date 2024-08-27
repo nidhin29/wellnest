@@ -4,15 +4,15 @@ part of 'profile_cubit.dart';
 abstract class ProfileState with _$ProfileState {
   const factory ProfileState({
     required bool isLoading,
-    required Option<Either<MainFailure,Model>> isFailureOrSuccessForGet,
-    required Option<Either<MainFailure,Unit>> isFailureOrSuccessForUpdate,
-    required Model? profileModel
+    required Option<Either<MainFailure, Model>> isFailureOrSuccessForGet,
+    required Option<Either<MainFailure, Unit>> isFailureOrSuccessForUpdate,
+    required Model? profileModel,
   }) = _Initial;
 
   factory ProfileState.initial() => ProfileState(
-    isLoading: false,
-    isFailureOrSuccessForGet: none(),
-    isFailureOrSuccessForUpdate: none(),
-    profileModel: null,
-  );
+        isLoading: false,
+        isFailureOrSuccessForGet: none(),
+        isFailureOrSuccessForUpdate: none(),
+        profileModel: null,
+      );
 }

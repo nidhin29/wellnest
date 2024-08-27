@@ -35,7 +35,7 @@ class SuccessPage extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => MainScreenPage()),
+                    MaterialPageRoute(builder: (context) => const MainScreenPage()),
                     (route) => false);
               },
               style: ButtonStyle(

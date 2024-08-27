@@ -33,16 +33,16 @@ class Model {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["email"] = email;
-    _data["password"] = password;
-    _data["name"] = name;
-    _data["age"] = age;
-    _data["gender"] = gender;
-    _data["api_key"] = apiKey;
-    _data["address"] = address;
-    _data["ProfileUpdated"] = profileUpdated;
-    _data["status"] = status;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["email"] = email;
+    data["password"] = password;
+    data["name"] = name;
+    data["age"] = age;
+    data["gender"] = gender;
+    data["api_key"] = apiKey;
+    data["address"] = address;
+    data["ProfileUpdated"] = profileUpdated;
+    data["status"] = status;
+    return data;
   }
 }

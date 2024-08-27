@@ -34,22 +34,22 @@ class HomePage extends StatelessWidget {
             backgroundColor: maincolor,
             titleSpacing: size * 0.09,
             title: Padding(
-              padding: EdgeInsets.only(top: size * 0.05),
+              padding: EdgeInsets.only(top: size * 0.01),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('${getGreeting()}👋',
                       style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
+                          textStyle: TextStyle(
                         color: Colors.grey,
-                        fontSize: 17,
+                        fontSize: size * 0.042,
                         fontWeight: FontWeight.w400,
                       ))),
                   Text('Nidhin V Ninan',
                       style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
+                          textStyle: TextStyle(
                         color: Colors.black,
-                        fontSize: 19,
+                        fontSize: size * 0.047,
                         fontWeight: FontWeight.w600,
                       ))),
                 ],
