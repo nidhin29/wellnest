@@ -17,8 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HomeState {
   bool get isLoading => throw _privateConstructorUsedError;
-  Option<Either<MainFailure, Unit>> get isFailureOrSuccess =>
+  Option<Either<MainFailure, HomeModel>> get isFailureOrSuccess =>
       throw _privateConstructorUsedError;
+  HomeModel? get homeModel => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -31,7 +32,9 @@ abstract class $HomeStateCopyWith<$Res> {
       _$HomeStateCopyWithImpl<$Res, HomeState>;
   @useResult
   $Res call(
-      {bool isLoading, Option<Either<MainFailure, Unit>> isFailureOrSuccess});
+      {bool isLoading,
+      Option<Either<MainFailure, HomeModel>> isFailureOrSuccess,
+      HomeModel? homeModel});
 }
 
 /// @nodoc
@@ -49,6 +52,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
   $Res call({
     Object? isLoading = null,
     Object? isFailureOrSuccess = null,
+    Object? homeModel = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -58,7 +62,11 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       isFailureOrSuccess: null == isFailureOrSuccess
           ? _value.isFailureOrSuccess
           : isFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, Unit>>,
+              as Option<Either<MainFailure, HomeModel>>,
+      homeModel: freezed == homeModel
+          ? _value.homeModel
+          : homeModel // ignore: cast_nullable_to_non_nullable
+              as HomeModel?,
     ) as $Val);
   }
 }
@@ -72,7 +80,9 @@ abstract class _$$InitialImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isLoading, Option<Either<MainFailure, Unit>> isFailureOrSuccess});
+      {bool isLoading,
+      Option<Either<MainFailure, HomeModel>> isFailureOrSuccess,
+      HomeModel? homeModel});
 }
 
 /// @nodoc
@@ -88,6 +98,7 @@ class __$$InitialImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? isFailureOrSuccess = null,
+    Object? homeModel = freezed,
   }) {
     return _then(_$InitialImpl(
       isLoading: null == isLoading
@@ -97,7 +108,11 @@ class __$$InitialImplCopyWithImpl<$Res>
       isFailureOrSuccess: null == isFailureOrSuccess
           ? _value.isFailureOrSuccess
           : isFailureOrSuccess // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, Unit>>,
+              as Option<Either<MainFailure, HomeModel>>,
+      homeModel: freezed == homeModel
+          ? _value.homeModel
+          : homeModel // ignore: cast_nullable_to_non_nullable
+              as HomeModel?,
     ));
   }
 }
@@ -106,16 +121,20 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
-      {required this.isLoading, required this.isFailureOrSuccess});
+      {required this.isLoading,
+      required this.isFailureOrSuccess,
+      required this.homeModel});
 
   @override
   final bool isLoading;
   @override
-  final Option<Either<MainFailure, Unit>> isFailureOrSuccess;
+  final Option<Either<MainFailure, HomeModel>> isFailureOrSuccess;
+  @override
+  final HomeModel? homeModel;
 
   @override
   String toString() {
-    return 'HomeState(isLoading: $isLoading, isFailureOrSuccess: $isFailureOrSuccess)';
+    return 'HomeState(isLoading: $isLoading, isFailureOrSuccess: $isFailureOrSuccess, homeModel: $homeModel)';
   }
 
   @override
@@ -126,11 +145,14 @@ class _$InitialImpl implements _Initial {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isFailureOrSuccess, isFailureOrSuccess) ||
-                other.isFailureOrSuccess == isFailureOrSuccess));
+                other.isFailureOrSuccess == isFailureOrSuccess) &&
+            (identical(other.homeModel, homeModel) ||
+                other.homeModel == homeModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isFailureOrSuccess);
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, isFailureOrSuccess, homeModel);
 
   @JsonKey(ignore: true)
   @override
@@ -142,13 +164,15 @@ class _$InitialImpl implements _Initial {
 abstract class _Initial implements HomeState {
   const factory _Initial(
       {required final bool isLoading,
-      required final Option<Either<MainFailure, Unit>>
-          isFailureOrSuccess}) = _$InitialImpl;
+      required final Option<Either<MainFailure, HomeModel>> isFailureOrSuccess,
+      required final HomeModel? homeModel}) = _$InitialImpl;
 
   @override
   bool get isLoading;
   @override
-  Option<Either<MainFailure, Unit>> get isFailureOrSuccess;
+  Option<Either<MainFailure, HomeModel>> get isFailureOrSuccess;
+  @override
+  HomeModel? get homeModel;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

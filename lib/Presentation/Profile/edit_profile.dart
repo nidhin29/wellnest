@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wellnest/Application/edit_profile/editprofile_cubit.dart';
+import 'package:wellnest/Application/home/home_cubit.dart';
 import 'package:wellnest/Application/profile/profile_cubit.dart';
 import 'package:wellnest/Domain/Failure/failure.dart';
 import 'package:wellnest/Domain/Profile/profile_model.dart';
@@ -60,6 +61,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             },
             (r) {
               BlocProvider.of<ProfileCubit>(context).getProfile();
+              BlocProvider.of<HomeCubit>(context).getDetails();
               Navigator.of(context).pop();
             },
           ),

@@ -4,9 +4,10 @@ part of 'home_cubit.dart';
 abstract class HomeState with _$HomeState {
   const factory HomeState({
     required bool isLoading,
-    required Option<Either<MainFailure, Unit>> isFailureOrSuccess,
+    required Option<Either<MainFailure, HomeModel>> isFailureOrSuccess,
+    required HomeModel? homeModel,
   }) = _Initial;
 
   factory HomeState.initial() =>
-      HomeState(isLoading: false, isFailureOrSuccess: none());
+      HomeState(isLoading: false, isFailureOrSuccess: none(), homeModel: null);
 }

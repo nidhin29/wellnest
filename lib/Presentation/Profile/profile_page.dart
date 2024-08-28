@@ -17,7 +17,14 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timestamp) {
-      BlocProvider.of<ProfileCubit>(context).getProfile();
+      final bloc = BlocProvider.of<ProfileCubit>(context).state;
+      bloc.isFailureOrSuccessForGet.fold(() {
+        BlocProvider.of<ProfileCubit>(context).getProfile();
+      }, (either) {
+        either.fold((l) {
+          BlocProvider.of<ProfileCubit>(context).getProfile();
+        }, (r) {});
+      });
     });
     final size = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -37,7 +44,6 @@ class ProfilePage extends StatelessWidget {
           kheight20,
           BlocConsumer<ProfileCubit, ProfileState>(
             listener: (context, state) {
-               
               state.isFailureOrSuccessForGet.fold(
                 () {},
                 (either) => either.fold(
@@ -62,7 +68,6 @@ class ProfilePage extends StatelessWidget {
               );
             },
             builder: (context, state) {
-           
               if (state.isLoading) {
                 return Column(
                   children: [

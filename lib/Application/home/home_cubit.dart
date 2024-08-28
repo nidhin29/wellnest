@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:wellnest/Domain/Failure/failure.dart';
+import 'package:wellnest/Domain/Home/home_model.dart';
 import 'package:wellnest/Domain/Home/home_service.dart';
 part 'home_state.dart';
 part 'home_cubit.freezed.dart';
@@ -24,7 +25,9 @@ class HomeCubit extends Cubit<HomeState> {
     )), (r) => emit(
       state.copyWith(
         isLoading: false,
-        isFailureOrSuccess: some(right(r))
+        homeModel: r,
+        isFailureOrSuccess: some(right(r),
+        )
       )
     ));
   }

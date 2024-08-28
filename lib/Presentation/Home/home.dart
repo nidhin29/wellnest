@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:wellnest/Application/home/home_cubit.dart';
+import 'package:wellnest/Domain/Failure/failure.dart';
 import 'package:wellnest/Presentation/Messages/chat.dart';
 import 'package:wellnest/Presentation/Messages/messages.dart';
+import 'package:wellnest/Presentation/common%20widgets/snackbar.dart';
 import 'package:wellnest/Presentation/common%20widgets/tips_widget.dart';
 import 'package:wellnest/Presentation/constants/constants.dart';
 
@@ -10,6 +15,21 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timestamp) {
+      final bloc = BlocProvider.of<HomeCubit>(context).state;
+      bloc.isFailureOrSuccess.fold(
+        () {
+          BlocProvider.of<HomeCubit>(context).getDetails();
+        },
+        (either) => either.fold(
+          (failure) {
+            BlocProvider.of<HomeCubit>(context).getDetails();
+          },
+          (r) {},
+        ),
+      );
+    });
+
     final size = MediaQuery.of(context).size.width;
     String getGreeting() {
       final hour = DateTime.now().hour;
@@ -34,7 +54,7 @@ class HomePage extends StatelessWidget {
             backgroundColor: maincolor,
             titleSpacing: size * 0.09,
             title: Padding(
-              padding: EdgeInsets.only(top: size * 0.01),
+              padding: EdgeInsets.only(top: size * 0.005),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -45,13 +65,59 @@ class HomePage extends StatelessWidget {
                         fontSize: size * 0.042,
                         fontWeight: FontWeight.w400,
                       ))),
-                  Text('Nidhin V Ninan',
-                      style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                        color: Colors.black,
-                        fontSize: size * 0.047,
-                        fontWeight: FontWeight.w600,
-                      ))),
+                  BlocConsumer<HomeCubit, HomeState>(
+                    listener: (context, state) {
+                      state.isFailureOrSuccess.fold(
+                        () {},
+                        (either) => either.fold(
+                          (failure) {
+                            if (!state.isLoading) {
+                              if (failure ==
+                                  const MainFailure.serverFailure()) {
+                                displaySnackBar(
+                                    context: context, text: "Server is down");
+                              } else if (failure ==
+                                  const MainFailure.clientFailure()) {
+                                displaySnackBar(
+                                    context: context,
+                                    text: "Something wrong with your network");
+                              } else {
+                                displaySnackBar(
+                                    context: context,
+                                    text: "Something Unexpected Happened");
+                              }
+                            }
+                          },
+                          (r) {},
+                        ),
+                      );
+                    },
+                    builder: (context, state) {
+                      if (state.isLoading) {
+                        return Shimmer.fromColors(
+                          baseColor: const Color.fromARGB(255, 0, 0, 0),
+                          highlightColor:
+                              const Color.fromARGB(255, 207, 207, 207),
+                          child: Container(
+                            width: size * 0.45,
+                            height: 20,
+                            decoration: const BoxDecoration(
+                              color: Color.fromARGB(34, 0, 0, 0),
+                            ),
+                          ),
+                        );
+                      }
+                      return state.homeModel == null
+                          ? const SizedBox()
+                          : Text(state.homeModel!.name!,
+                              style: GoogleFonts.poppins(
+                                  textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: size * 0.044,
+                                fontWeight: FontWeight.w600,
+                              )));
+                    },
+                  ),
                 ],
               ),
             ),
